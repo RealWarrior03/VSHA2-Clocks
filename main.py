@@ -6,6 +6,7 @@ def thread_runner(id):
         while not input_queues[id].empty():
             data = input_queues[id].get()
             print(f"Processing data: {data}")
+            print(f"thread id: {id} ")
 
 if __name__ == '__main__':
     nmbThreads = 4
@@ -21,6 +22,7 @@ if __name__ == '__main__':
         threads[i].start()
 
     input_queues[0].put("hey first thread")
+    input_queues[2].put("hello second thread")
 
     for i in range(nmbThreads):
         threads[i].join()
