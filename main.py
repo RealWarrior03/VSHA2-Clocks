@@ -22,7 +22,7 @@ def message_sequencer_runner(nmbThreads):
     print("Test")
 
 
-# assumes input_queues and nmbThreads are in range
+# assumes nodes and nmbThreads are in scope
 def random_messages(nmb_messages):
     for i in range(nmb_messages):
         msg = messages.Message(EXTERNAL_FLAG, random.randrange(0, 1000))
@@ -38,8 +38,11 @@ if __name__ == '__main__':
     input_queues = []
     # threads and queues are generated and can be access through arrays
     for i in range(nmbThreads):
-        input_queues.append(queue.Queue())
-        threads.append(threading.Thread(target=thread_runner, args=(i,)))
+
+        myNode = node.Node(i,sequencr)
+        nodes.append(myNode)
+        sequencr.addNode(myNode)
+        threads.append(threading.Thread(target=myNode.thread_runner, args=(i,)))
 
     for i in range(nmbThreads):  # threads are started
         threads[i].start()
