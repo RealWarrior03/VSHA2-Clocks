@@ -1,4 +1,5 @@
 import queue
+import messages
 
 
 #class Node contains Input-Queue, Array to store history of incoming messages
@@ -10,5 +11,8 @@ class Node:
         return self.inbox
 
     def poll_messages(self):
-        message = self.inbox.get
+        if not self.inbox.empty():
+            message = self.inbox.get
+        #if message.flag == 0:
+
 
