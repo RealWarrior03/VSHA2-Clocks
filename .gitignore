@@ -4,8 +4,8 @@
 #Do not ignore these files
 !.gitignore
 !main.py
-!Sequencer.py
-!Messages.py
+!sequencer.py
+!messages.py
 
 #The files above are added, disregarding in which subdirectory they are located
 !*/
