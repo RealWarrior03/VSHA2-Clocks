@@ -41,3 +41,4 @@ class Node:
          with open(self.id, 'w') as f:
              for item in self.recieved_messages:
                  f.write(f'{item}\n')
+         f.close
