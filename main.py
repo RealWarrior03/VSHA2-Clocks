@@ -4,12 +4,6 @@ import queue
 EXTERNAL_FLAG = 0
 INTERNAL_FLAG = 1
 
-#class for exchanging data
-class Message:
-    def __init__(self, flag, payload):
-        self.flag = flag
-        self.payload = payload
-
 
 def thread_runner(id):
     while True:
