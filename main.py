@@ -1,5 +1,7 @@
 import threading
 import queue
+import random
+import messages
 
 EXTERNAL_FLAG = 0
 INTERNAL_FLAG = 1
@@ -20,6 +22,13 @@ def message_sequencer_runner(nmbThreads):
     print("Test")
 
 
+def random_messages(nmb_messages, input_queues):
+    for i in range(nmb_messages):
+        msg = messages.Message(EXTERNAL_FLAG, random.randrange(0, 1000))
+        receiving_thread = random.randrange(0, nmbThreads)
+        input_queues[receiving_thread].put(msg)
+
+
 if __name__ == '__main__':
     nmbThreads = 4
 
@@ -34,10 +43,7 @@ if __name__ == '__main__':
     for i in range(nmbThreads):  # threads are started
         threads[i].start()
 
-    # data transfer test
-    m = Message(EXTERNAL_FLAG, "hey first thread")
-    input_queues[0].put(m)
-
+    random_messages(1000, input_queues)
 
     for i in range(nmbThreads):  # threads are joined in the end to ensure every thread is finished
         threads[i].join()
