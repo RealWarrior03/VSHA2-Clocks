@@ -36,3 +36,8 @@ class Node:
 
     def saveMessage(self,message):
         self.recieved_messages[message.counter] = message.payload
+
+    def saveToLogFile(self):
+         with open(self.id, 'w') as f:
+             for item in self.recieved_messages:
+                 f.write(f'{item}\n')
