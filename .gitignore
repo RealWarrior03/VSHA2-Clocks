@@ -5,6 +5,8 @@
 !.gitignore
 !main.py
 !node.py
+!Sequencer.py
+!Messages.py
 
 #The files above are added, disregarding in which subdirectory they are located
 !*/
