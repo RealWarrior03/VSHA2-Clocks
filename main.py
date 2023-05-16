@@ -22,7 +22,8 @@ def message_sequencer_runner(nmbThreads):
     print("Test")
 
 
-def random_messages(nmb_messages, input_queues):
+# assumes input_queues and nmbThreads are in range
+def random_messages(nmb_messages):
     for i in range(nmb_messages):
         msg = messages.Message(EXTERNAL_FLAG, random.randrange(0, 1000))
         receiving_thread = random.randrange(0, nmbThreads)
