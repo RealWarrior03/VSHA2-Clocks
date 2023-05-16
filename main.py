@@ -6,22 +6,6 @@ import messages
 EXTERNAL_FLAG = 0
 INTERNAL_FLAG = 1
 
-
-def thread_runner(id):
-    while True:
-        while not input_queues[id].empty():  # checks for new messages in input_queue
-            data = input_queues[id].get()  # get data out of input_queue
-
-            # process data
-            payload = data.payload
-            print(f"Processing data: {payload}")
-            print(f"thread id: {id} ")
-
-
-def message_sequencer_runner(nmbThreads):
-    print("Test")
-
-
 # assumes nodes and nmbThreads are in scope
 def random_messages(nmb_messages):
     for i in range(nmb_messages):

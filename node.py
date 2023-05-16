@@ -6,13 +6,11 @@ import messages
 import sequencer
 class Node:
 
-
     def __init__(self,nodeID,seq):
         inbox = queue.Queue()
         self.recieved_messages = []
         self.nodeID=nodeID
         self.seq = seq
-
 
     def input_queue(self):
         return self.inbox
@@ -25,11 +23,6 @@ class Node:
                     sendToSeq(message)
                 else:                 #Internal Flag
                     saveMessage(message)
-
-
-
-
-
 
     def sendToSeq(self,message):
         self.seq.getSequencerInput.put(message)
