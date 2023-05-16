@@ -11,7 +11,7 @@ class Sequencer:
 
   def thread_runner(self):
       while True:
-          while not self.sequencerInput.empty():
+          if not self.sequencerInput.empty():
              exMessage = message.__init__(1,counter)
              self.counter = self.counter+1
              broadcast(self,exMessage)
