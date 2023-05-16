@@ -1,4 +1,4 @@
-import Message
+import messages
 class Sequencer:
 
   def __init__(self, threadInputQueues):
@@ -12,9 +12,7 @@ class Sequencer:
   def thread_runner(self):
       while True:
           while not self.sequencerInput.empty():
-             exMessage = [[]]
-             exMessage[0] = self.sequencerInput.get()
-             exMessage[1] = self.counter
+             exMessage = message.__init__(1,counter)
              self.counter = self.counter+1
              broadcast(self,exMessage)
 
