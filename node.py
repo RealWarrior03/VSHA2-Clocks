@@ -1,39 +1,40 @@
 import queue
 import message
 
-
-#class Node contains Input-Queue, Array to store history of incoming messages
+# class Node contains Input-Queue, Array to store history of incoming messages
 import sequencer
+
+
 class Node:
 
-    def __init__(self,nodeID,seq):
+    def __init__(self, nodeID, seq):
         self.inbox = queue.Queue()
         self.recieved_messages = []
-        self.nodeID=nodeID
+        self.nodeID = nodeID
         self.seq = seq
-
 
     def input_queue(self):
         return self.inbox
 
-    def sendToSeq(self,message):
-        self.seq.getSequencerInput().put(message)
+    def sendToSeq(self, m):
+        self.seq.getSequencerInput().put(m)
 
-    def saveMessage(self,message):
-        self.recieved_messages[message.counter] = message.payload
+    def saveMessage(self, m):
+        self.recieved_messages.insert(m.counter, m.payload)
 
     def thread_runner(self):
         while True:
             if not self.inbox.empty():
-                message = self.inbox.get()
-                if message.flag == 0: #External Msg
-                    self.sendToSeq(message)
-                else:                 #Internal Flag
-                    self.saveMessage(message)
+                m = self.inbox.get()
+                if m.flag == 0:  # External Msg
+                    self.sendToSeq(m)
+                else:  # Internal Flag
+                    self.saveMessage(m)
 
     def saveToLogFile(self):
-         with open("Logs/Node_"+str(self.nodeID)+".txt", 'w') as f:
-             for item in self.recieved_messages:
-                 f.write(f'{item}\n')
-             f.close
-
+        with open("vs_uebung_HA2_gruppe_31/Logs/Node"+ str(self.nodeID)+".txt", 'w') as f:
+            #rcvdMsgStr = str(self.recieved_messages)
+            for item in self.recieved_messages:
+                f.write(str(item))  #TODO does not work
+            #f.writelines(rcvdMsgStr)
+            f.close()
