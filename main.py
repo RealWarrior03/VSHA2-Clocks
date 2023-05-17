@@ -18,7 +18,7 @@ def random_messages(nmb_messages):
 
 
 if __name__ == '__main__':
-    nmbThreads = 4
+    nmbThreads = 1
 
     # Erstelle zwei Threads
     nodeThreads = []
