@@ -1,4 +1,4 @@
-import messages
+import message
 import queue
 class Sequencer:
 
@@ -14,19 +14,12 @@ class Sequencer:
       while True:
           if not self.sequencerInput.empty():
              msgToBroadcast = self.sequencerInput.get()
-             exMessage = message.Message(1,msgToBroadcast.payload,counter)
+             exMessage = message.Message(1,msgToBroadcast.payload,self.counter)
              self.counter = self.counter+1
-             broadcast(self,exMessage)
+             self.broadcast(self,exMessage)
 
   def addNode(self,node):
       self.nodes.append(node)
-
-
-
-
-
-
-
 
   def broadcast(self,message):
       for n in self.nodes:

@@ -1,5 +1,5 @@
 import queue
-import messages
+import message
 
 
 #class Node contains Input-Queue, Array to store history of incoming messages
@@ -22,18 +22,12 @@ class Node:
             if not self.inbox.empty():
                 message = self.inbox.get()
                 if message.flag == 0: #External Msg
-                    sendToSeq(message)
+                    self.sendToSeq(message)
                 else:                 #Internal Flag
-                    saveMessage(message)
-
-    def sendToSeq(self,message):
-        self.seq.getSequencerInput.put(message)
-
-    def saveMessage(self,message):
-        self.recieved_messages[message.counter] = message.payload
+                    self.saveMessage(message)
 
     def saveToLogFile(self):
-         with open("Logs/Node_"+str(self.id)+".txt", 'w') as f:
+         with open("Logs/Node_"+str(self.nodeID)+".txt", 'w') as f:
              for item in self.recieved_messages:
                  f.write(f'{item}\n')
              f.close

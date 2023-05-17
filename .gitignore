@@ -6,7 +6,7 @@
 !main.py
 !node.py
 !sequencer.py
-!messages.py
+!message.py
 
 #The files above are added, disregarding in which subdirectory they are located
 !*/
