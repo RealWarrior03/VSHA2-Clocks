@@ -7,19 +7,21 @@ import sequencer
 class Node:
 
     def __init__(self,nodeID,seq):
-        inbox = queue.Queue()
+        self.inbox = queue.Queue()
         self.recieved_messages = []
         self.nodeID=nodeID
         self.seq = seq
 
+
     def input_queue(self):
         return self.inbox
+
 
     def thread_runner(self):
         while True:
             if not self.inbox.empty():
-                message = self.inbox.get
-                if message.flag == EXTERNAL_FLAG: #External Msg
+                message = self.inbox.get()
+                if message.flag == 0: #External Msg
                     sendToSeq(message)
                 else:                 #Internal Flag
                     saveMessage(message)

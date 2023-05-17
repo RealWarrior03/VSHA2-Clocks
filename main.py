@@ -31,7 +31,7 @@ if __name__ == '__main__':
         myNode = node.Node(i,sequencr)
         nodes.append(myNode)
         sequencr.addNode(myNode)
-        threads.append(threading.Thread(target=myNode.thread_runner, args=(i,)))
+        threads.append(threading.Thread(target=myNode.thread_runner))
 
     for i in range(nmbThreads):  # threads are started
         threads[i].start()
