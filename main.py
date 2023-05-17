@@ -12,7 +12,7 @@ INTERNAL_FLAG = 1
 # assumes nodes and nmbThreads are in scope
 def random_messages(nmb_messages):
     for i in range(nmb_messages):
-        msg = messages.Message(EXTERNAL_FLAG, random.randrange(0, 1000))
+        msg = message.Message(EXTERNAL_FLAG, random.randrange(0, 1000))
         receiving_thread = random.randrange(0, nmbThreads)
         nodes[receiving_thread].input_queue().put(msg)
 
@@ -25,6 +25,8 @@ if __name__ == '__main__':
     nodes = []
 
     sequencr = sequencer.Sequencer()
+    seqThread = threading.Thread(target=sequencr.thread_runner)
+    seqThread.start()
 
     # threads and queues are generated and can be access through arrays
     for i in range(nmbThreads):

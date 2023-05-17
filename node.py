@@ -16,6 +16,11 @@ class Node:
     def input_queue(self):
         return self.inbox
 
+    def sendToSeq(self,message):
+        self.seq.getSequencerInput().put(message)
+
+    def saveMessage(self,message):
+        self.recieved_messages[message.counter] = message.payload
 
     def thread_runner(self):
         while True:
