@@ -36,20 +36,11 @@ class Node:
         path = os.getcwd() + "/Logs/"
         if not os.path.exists(path):
             os.makedirs(path)
-            print("path not found, but now created :)")
 
         filename = "Node" + str(self.nodeID) + ".txt"
         fullpath = os.path.join(path, filename)
-        print(fullpath)
         with open(fullpath, 'w') as file:
-        #with open("vs_uebung_HA2_gruppe_31/Logs/Node"+ str(self.nodeID)+".txt", 'w') as f:
-            #rcvdMsgStr = str(self.received_messages)
-            print("messages: " + str(self.received_messages))
-            print("inbox: " + str(list(self.inbox.queue)))
             for item in self.received_messages:
-                print(str(item))
-                file.write(str(item))  #TODO does not work
-                print("received message written to the logs")
+                file.write(str(item) + "\n")  #TODO does not work
             #f.writelines(rcvdMsgStr)
             file.close()
-            print("file successfully closed")

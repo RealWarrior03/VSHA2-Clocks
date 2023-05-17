@@ -17,7 +17,7 @@ def random_messages(nmb_messages):
         nodes[receiving_thread].input_queue().put(msg)
 
 if __name__ == '__main__':
-    nmbThreads = 1
+    nmbThreads = 4
 
     # Erstelle zwei Threads
     nodeThreads = []
@@ -37,7 +37,7 @@ if __name__ == '__main__':
     for i in range(nmbThreads):  # threads are started
         nodeThreads[i].start()
 
-    random_messages(1)
+    random_messages(1000)
 
     for i in range(nmbThreads):  # threads are joined in the end to ensure every thread is finished
         nodes[i].saveToLogFile()
