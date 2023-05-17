@@ -16,7 +16,6 @@ def random_messages(nmb_messages):
         receiving_thread = random.randrange(0, nmbThreads)
         nodes[receiving_thread].input_queue().put(msg)
 
-
 if __name__ == '__main__':
     nmbThreads = 1
 
