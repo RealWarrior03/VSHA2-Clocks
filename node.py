@@ -13,6 +13,7 @@ class Node:
         self.received_messages = []
         self.nodeID = nodeID
         self.seq = seq
+        self.mgSendAllMess = False
         self.sendAllMess = False
 
     def input_queue(self):
@@ -32,6 +33,8 @@ class Node:
                     self.sendToSeq(m)
                 else:  # Internal Flag
                     self.saveMessage(m)
+            if self.inbox.empty() and self.mgSendAllMess:
+                self.sendAllMess = True
 
     def saveToLogFile(self):
         path = os.getcwd() + "/Logs/"

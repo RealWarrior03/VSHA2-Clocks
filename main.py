@@ -37,15 +37,15 @@ if __name__ == '__main__':
     for i in range(nmbThreads):  # threads are started
         nodeThreads[i].start()
 
-    random_messages(2)
+    random_messages(1000)
 
     for i in range(nmbThreads):  # threads are started
-        nodes[i].sendAllMess = True
-
-    for i in range(nmbThreads):  # threads are started
-        nodes[i].saveToLogFile()
+        nodes[i].mgSendAllMess = True
 
     for i in range(nmbThreads):  # threads are joined in the end to ensure every thread is finished
         nodeThreads[i].join()
 
     seqThread.join()
+
+    for i in range(nmbThreads):  # threads are started
+        nodes[i].saveToLogFile()

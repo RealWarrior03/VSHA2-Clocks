@@ -31,7 +31,12 @@ class Sequencer:
             n.input_queue().put(m)
 
     def allNodesFinished(self):
-        allFinished = True
+        if len(self.nodes) == 0:
+            allFinished = False
+        else:
+            allFinished = True
+
         for n in self.nodes:
             if not n.sendAllMess:
                 allFinished = False
+        return allFinished
