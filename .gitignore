@@ -8,5 +8,9 @@
 !task1/sequencer.py
 !task1/message.py
 
+!task2/main.py
+!task2/node.py
+!task2/message.py
+
 #The files above are added, disregarding in which subdirectory they are located
 !*/
