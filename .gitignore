@@ -3,10 +3,10 @@
 
 #Do not ignore these files
 !.gitignore
-!main.py
-!node.py
-!sequencer.py
-!message.py
+!task1/main.py
+!task1/node.py
+!task1/sequencer.py
+!task1/message.py
 
 #The files above are added, disregarding in which subdirectory they are located
 !*/
