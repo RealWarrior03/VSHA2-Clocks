@@ -13,6 +13,7 @@ class Node:
         self.received_messages = []
         self.nodeID = nodeID
         self.seq = seq
+        self.sendAllMess = False
 
     def input_queue(self):
         return self.inbox
@@ -24,7 +25,7 @@ class Node:
         self.received_messages.insert(m.counter, m.payload)
 
     def thread_runner(self):
-        while True:
+        while not self.seq.sendAllMess or not self.inbox.empty():   #waits until seq send all of its messages to the nodes and queue empty
             if not self.inbox.empty():
                 m = self.inbox.get()
                 if m.flag == 0:  # External Msg
