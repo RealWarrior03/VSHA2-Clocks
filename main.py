@@ -1,3 +1,4 @@
+import sys
 import threading
 import queue
 import random
@@ -16,8 +17,10 @@ def random_messages(nmb_messages):
         receiving_thread = random.randrange(0, nmbThreads)
         nodes[receiving_thread].input_queue().put(msg)
 
-if __name__ == '__main__':
-    nmbThreads = 4
+
+if __name__ == '__main__':  # param1: nmbThreads, param2: nmbMessages
+    nmbThreads = int(sys.argv[1])
+    nmbMessages = int(sys.argv[2])
 
     # Erstelle zwei Threads
     nodeThreads = []
@@ -37,7 +40,7 @@ if __name__ == '__main__':
     for i in range(nmbThreads):  # threads are started
         nodeThreads[i].start()
 
-    random_messages(1000)
+    random_messages(nmbMessages)
 
     for i in range(nmbThreads):  # threads are started
         nodes[i].mgSendAllMess = True
