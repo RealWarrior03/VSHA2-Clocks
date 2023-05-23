@@ -26,7 +26,7 @@ if __name__ == '__main__':  # param1: nmbThreads, param2: nmbMessages
 
     # threads and queues are generated and can be access through arrays
     for i in range(nmbThreads):
-        myNode = node.Node(i)
+        myNode = node.Node(i, nmbMessages)
         nodes.append(myNode)
         nodeThreads.append(threading.Thread(target=myNode.thread_runner))
 
@@ -40,11 +40,11 @@ if __name__ == '__main__':  # param1: nmbThreads, param2: nmbMessages
 
     random_messages(nmbMessages)
 
-    for i in range(nmbThreads):  # threads are started
-        nodes[i].mgSendAllMess = True
+  #for i in range(nmbThreads):  # threads are started
+  #          nodes[i].mgSendAllMess = True
 
-    for i in range(nmbThreads):  # threads are joined in the end to ensure every thread is finished
-        nodeThreads[i].join()
+    for n in nodeThreads:  # threads are joined in the end to ensure every thread is finished
+        n.join()
 
-    for i in range(nmbThreads):  # threads are started
-        nodes[i].saveToLogFile()
+    for n in nodes:  # threads are started
+        n.saveToLogFile()

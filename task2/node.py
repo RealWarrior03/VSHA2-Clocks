@@ -7,16 +7,17 @@ import os
 
 class Node:
 
-    def __init__(self, nodeID):
+    def __init__(self, nodeID, maxcount):
         self.inbox = queue.Queue()
         self.received_messages = []
         self.counter = 0
+        self.maxcount = maxcount
 
         self.nodeID = nodeID
         self.nodes = []
 
-        self.mgSendAllMess = False
-        self.sendAllMess = False
+        #self.mgSendAllMess = False
+        #self.sendAllMess = False
 
     def input_queue(self):
         return self.inbox
@@ -24,11 +25,12 @@ class Node:
     def saveMessage(self, m):
         if m.counter <= self.counter and m.nodeId < self.nodeID:
             self.received_messages.insert(m.counter, m.payload)
+            self.counter = m.counter + 1
         else:
             self.received_messages.append(m.payload)
 
     def thread_runner(self):
-        while not self.allNodesFinished() or not self.inbox.empty() or self.mgSendAllMess:   #waits until seq send all of its messages to the nodes and queue empty
+        while len(self.received_messages) < self.maxcount:   #waits until seq send all of its messages to the nodes and queue empty
             if not self.inbox.empty():
                 m = self.inbox.get()
                 if m.flag == 0:  # External Msg
@@ -38,8 +40,8 @@ class Node:
                     self.broadcast(m)
                 else:  # Internal Flag
                     self.saveMessage(m)
-            """if self.inbox.empty() and self.mgSendAllMess:
-                self.sendAllMess = True"""
+            #if self.inbox.empty() and self.mgSendAllMess:
+                #self.sendAllMess = True
 
     def saveToLogFile(self):
         path = os.getcwd() + "/Logs/"
@@ -50,21 +52,21 @@ class Node:
         fullpath = os.path.join(path, filename)
         with open(fullpath, 'w') as file:
             for item in self.received_messages:
-                file.write(str(item) + "\n")  #TODO does not work
+                file.write(str(item) + "\n")
             #f.writelines(rcvdMsgStr)
             file.close()
-
-    def allNodesFinished(self):
-        if len(self.nodes) == 0:
-            allFinished = False
-        else:
-            allFinished = True
-
-        for n in self.nodes:
-            if not n.sendAllMess:
-                allFinished = False
-        return allFinished
 
     def broadcast(self, m):
         for n in self.nodes:
             n.input_queue().put(m)
+
+    #def allNodesFinished(self):
+     #   if len(self.nodes) == 0:
+      #      allFinished = False
+       # else:
+        #    allFinished = True
+#
+ #       for n in self.nodes:
+  #          if not n.sendAllMess:
+   #             allFinished = False
+    #    return allFinished
