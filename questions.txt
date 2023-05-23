@@ -1,0 +1,4 @@
+Die Ordnung wäre partiell.
+Die Geschichte wäre bei allen gleich (komisch weil frage impliziert dass es nicht so ist.
+Vorteil von Vektor Uhren ist, dass man wenn eine message in der history vor einer anderen ist, man darauf schliesen
+kann dass sie auch davor passiert ist. Nachteil wäre dass es keine klare Geschichte gäbe.

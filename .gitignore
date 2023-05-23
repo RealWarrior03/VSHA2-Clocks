@@ -12,5 +12,7 @@
 !task2/node.py
 !task2/message.py
 
+!questions.txt
+
 #The files above are added, disregarding in which subdirectory they are located
 !*/
