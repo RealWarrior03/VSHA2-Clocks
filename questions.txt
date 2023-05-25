@@ -1,4 +1,9 @@
-Die Ordnung wäre partiell.
-Die Geschichte wäre bei allen gleich (komisch weil frage impliziert dass es nicht so ist.
+Man müsste jeder message einen Vektor der Größe der anzahl der nodes anhängen, bei der der Wert in jeder Zeile des Vektors die Anzahl der der node bekannten messages ist, die bei der zugehörigen node angekommen sind.
+
+Die Ordnung wäre dann partiell.
+
+
+Die History aller threads wäre nicht identisch, da sich aus den vektoren keine eindeutige history ableiten lässt. Um zu testen ob die Histories korrekt sind 
+
 Vorteil von Vektor Uhren ist, dass man wenn eine message in der history vor einer anderen ist, man darauf schliesen
-kann dass sie auch davor passiert ist. Nachteil wäre dass es keine klare Geschichte gäbe.
+kann dass sie auch davor passiert ist. Nachteil wäre dass es keine einheitliche history gäbe.
