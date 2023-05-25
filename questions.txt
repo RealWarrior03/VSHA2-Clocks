@@ -1,9 +1,12 @@
-Man müsste jeder message einen Vektor der Größe der anzahl der nodes anhängen, bei der der Wert in jeder Zeile des Vektors die Anzahl der der node bekannten messages ist, die bei der zugehörigen node angekommen sind.
-
-Die Ordnung wäre dann partiell.
 
 
-Die History aller threads wäre nicht identisch, da sich aus den vektoren keine eindeutige history ableiten lässt. Um zu testen ob die Histories korrekt sind 
+Jede Node hat statt einem counter einen Vektor der Größe Anzahl nodes. Falls eine Node eine externe Message erhält, speichert er diese mit dem Stand seiner Vektoruhr ab, wobei er davor den Wert in seiner Spalte um Eins inkremiert hat. Bei internen Messages speichert er die Nachricht mit der Vektoruhr ab, die sie bei der Sender node hatte. Falls Werte von der Vektoruhr von der Message größer sind updatet man seine eigene Vektoruhr zu diesen Werten.
 
-Vorteil von Vektor Uhren ist, dass man wenn eine message in der history vor einer anderen ist, man darauf schliesen
-kann dass sie auch davor passiert ist. Nachteil wäre dass es keine einheitliche history gäbe.
+
+i) Die Ordnung wäre dann partiell, da Messages unvergleichbare Vektoruhren haben kann, wenn man z.Bsp. in einer Node eine externe und interne eMssage vergleicht. 
+
+
+ii) Die History aller Threads wäre nicht identisch, da wir eine partielle Ordnung haben und die Unvergleichbaren Events bei den Nodes unterschiedliche Reihenfolgen haben. Um zu testen ob die Histories korrekt sind, müssen wir bei jedem Node für alle seine Messages V und alle Nachfolgermessages V' von V überprüfen, ob V < V' oder V und V' unvergleichbar sind (wie in der pdf definiert).
+
+
+iii) Vorteil von Vektor Uhren ist, wenn V(a) < V(b), dann gilt dass a vor b angekommen ist. Nachteil wäre dass es keine einheitliche History gäbe und wir mehr Overhead haben. 
