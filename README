@@ -1,0 +1,3 @@
+Ausführen unter linux: python3 [path zur main der aufgabe] [nmbThreads] [nmbMessages]
+
+z.B. python3 ./task2/main.py 8 1000
