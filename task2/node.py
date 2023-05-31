@@ -23,11 +23,7 @@ class Node:
         return self.inbox
 
     def saveMessage(self, m):
-        if m.counter <= self.counter and m.nodeId < self.nodeID:
-            self.received_messages.insert(m.counter, m.payload)
-            self.counter = m.counter + 1
-        else:
-            self.received_messages.append(m.payload)
+        self.received_messages.append(m)
 
     def thread_runner(self):
         while len(self.received_messages) < self.maxcount:   #waits until seq send all of its messages to the nodes and queue empty
@@ -44,6 +40,7 @@ class Node:
                 #self.sendAllMess = True
 
     def saveToLogFile(self):
+        self.sortMessages()
         path = os.getcwd() + "/Logs/"
         if not os.path.exists(path):
             os.makedirs(path)
@@ -52,13 +49,17 @@ class Node:
         fullpath = os.path.join(path, filename)
         with open(fullpath, 'w') as file:
             for item in self.received_messages:
-                file.write(str(item) + "\n")
+                file.write(str(item.payload) + "\n")
             #f.writelines(rcvdMsgStr)
             file.close()
 
     def broadcast(self, m):
         for n in self.nodes:
             n.input_queue().put(m)
+
+    def sortMessages(self):
+        self.received_messages.sort(key=(lambda m: m.counter * (len(self.nodes)+1) + m.nodeId))
+
 
     #def allNodesFinished(self):
      #   if len(self.nodes) == 0:
